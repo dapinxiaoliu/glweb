@@ -1,0 +1,161 @@
+
+
+
+h2.comtitle{
+    display: flex;
+    height: 40px;
+    border-bottom: 1px solid #fad4ba;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #fcf3e3 5%, #f6e2bb 45%,#f6e2bb 55%, #fcf3e3 100%);
+	color: #333;
+	font-size: 14px;
+}
+h2.comtitle strong{
+    display: block;
+    padding: 0 20px;
+    font-size: 18px;
+    color: #fff;
+    background: linear-gradient(to bottom, #dc4f49 5%, #c21a20 45%,#c21a20 55%, #dc4f49 100%);
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: relative;
+}
+h2.comtitle strong::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: #dc4f49 transparent transparent;
+    position: absolute;
+    bottom: -5px;
+    left: 47%;
+}
+h2.comtitle span{
+	display: flex;
+	color: #333;
+	font-weight: normal;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
+	margin-left: 20px;
+}
+h2.comtitle a{
+    font-size: 14px;
+    color: #333;
+    font-weight: normal;
+	margin-right: 5px !important;
+}
+h2.comtitle a.margina{
+	margin-right: 20px !important;
+}
+h2.comtitle a em{
+	padding: 0 5px;
+}
+
+.comborder{
+    border: 1px solid #fad4ba;
+    box-sizing: border-box;
+}
+.comnew{
+	background: #fff;
+}
+li.newsli{
+	width: 20px !important;
+	height: 20px !important;
+	background: #fff;
+	display: inline-block;
+	margin: 0 4px;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+}
+.map{
+	width: 254px;
+	height: 250px;
+	margin: 15px auto 0;
+	
+	
+	
+}
+.map .BMap_bubble_pop{
+	width: 197px !important;
+	top: 30px !important;
+}
+.map .BMap_bubble_top{
+	font-size: 14px !important;
+}
+.map .BMap_bubble_content{
+	font-size: 12px !important;
+	height: 55px !important;
+	line-height: 18px !important;
+	width: 200px !important;
+}
+.map .BMap_bubble_center{
+	height: 70px !important;
+}
+.map .BMap_bubble_pop > img{
+	top: 101px !important;
+}
+.page{
+	display: flex;
+	justify-content: center;
+}
+.page .el-pagination{
+	display: flex;
+	margin: 0 auto !important;
+}
+.page .el-pagination button{
+	height: 30px;
+	padding: 0 10px !important;
+}
+.page .el-pager{
+	display: flex;
+	padding: 0 5px !important;
+}
+.page .el-pager li{
+	height: 30px !important;
+	width: 40px !important;
+	line-height: 30px;
+	margin: 0  10px!important;
+	padding: 0 !important;
+	transition: color .2s linear;
+}
+.page .el-pager li:hover{
+	color: #c21a20 !important;
+}
+
+.contentbox img{
+	margin: 0 auto;
+	
+}
+.contentbox p,
+.contentbox p span{
+	font-size: 16px;
+	line-height: 24px !important;
+	padding: 10px 0;
+	color: #333;
+}
+.contentbox div{
+	line-height: 24px !important;
+}
+.sline{
+	color: #e73825 !important;
+}
+.el-loading-spinner .el-loading-text,
+.el-icon-loading{
+	color: #c21a20 !important;
+	stroke:#c21a20 !important
+}
+
+[v-cloak] {
+    display: none !important;
+}
+body{
+	overflow-y: scroll !important
+}
+

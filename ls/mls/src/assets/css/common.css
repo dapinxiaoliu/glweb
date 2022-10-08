@@ -1,0 +1,148 @@
+
+
+.linebox{
+    position: relative;
+    z-index: 2;
+    width: 88%;
+    margin: 0 auto;
+}
+.linebox strong{
+    font-size: .38rem;
+    line-height: 100%;
+    text-align: center;
+    display: block;
+    color: #cc131d;
+    font-weight: bold;
+    margin-top: .4rem;
+}
+.linebox em{
+    display: block;
+    height: .41rem;
+    width: .41rem;
+    margin: .2rem auto 0;
+    background: url('../images/img_19.png') no-repeat center / .41rem;
+}
+.linebox::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background:#838da9;
+    top: .78rem;
+    z-index: -1;
+}
+.linebox p{
+    font-size: .26rem;
+    text-align: center;
+    margin-top: .12rem;
+    line-height: 100%;
+}
+.morelink{
+    width: 2.5rem;
+    height: .5rem;
+    color: #cc131d;
+    font-weight: bold;
+    line-height: .5rem;
+    text-align: center;
+    font-size: .24rem;
+    border: .04rem solid #cc131d;
+    display: block;
+    border-radius: .06rem;
+    margin: 0 auto;
+}
+.dianhua{
+    width: 5.15rem;
+    display: block;
+    margin: .2rem auto 0;
+}
+.fiexddom{
+    position: fixed;
+    width: 7.5rem;
+    top: 0;
+    transition: all .2s linear;
+}
+.titleinfo{
+    padding: .1rem .3rem;
+}
+.titleinfo h3{
+    color: #333;
+    font-weight: normal;
+    background: url('../images/icon_home.png') no-repeat left center / .26rem;
+    text-indent: .3rem;
+    height: .5rem;
+    line-height: .5rem;
+    font-size: .26rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.titleinfo h3 a{
+    font-size: .26rem;
+    color: #333;
+    margin-right:.03rem;
+}
+.titleinfo h3 em{
+	margin-right: .03rem;
+    font-size: .26rem;
+}
+
+
+/* 分页 */
+.page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .18rem;
+    color: #333;
+    margin-top: .4rem;
+	margin-bottom: .5rem;
+}
+.page .el-pagination{
+	display: flex;
+}
+.page .el-pagination button{
+	height: .6rem;
+	width: 1.2rem;
+	padding: 0!important;
+	display: none;
+}
+
+.page .el-pagination button span{
+	display: block;
+	height: .6rem;
+	line-height: .6rem;
+	width: 100%;
+}
+.page .el-pager{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0 !important;
+	border: none !important;
+}
+.page .el-pager li{
+	width: .6rem !important;
+	height: .6rem !important;
+	line-height: .6rem;
+	margin: 0  .1rem!important;
+	font-size: .26rem
+}
+.page .el-pager li.active{
+	background: #cc131d !important;
+}
+.nav .router-link-active{
+	background: #cc131d;
+	color: #fff;
+	display: block;
+}
+.nav .router-link-active a,
+.nav .router-link-active a:hover{
+	color: #fff !important;
+}
+
+
+.swiper-pagination-bullet-active{
+	background: #cc131d !important;
+}
+em.sline{
+	color: #cc131d;
+}
