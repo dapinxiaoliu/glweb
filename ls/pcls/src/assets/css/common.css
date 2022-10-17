@@ -131,18 +131,60 @@ li.newsli{
 
 .contentbox img{
 	margin: 0 auto;
+	height: auto !important;
 	
 }
 .contentbox p,
-.contentbox p span{
+.contentbox p span
+{
 	font-size: 16px;
-	line-height: 24px !important;
+	line-height: 24px ;
 	padding: 10px 0;
 	color: #333;
 }
+
 .contentbox div{
-	line-height: 24px !important;
+	line-height: 24px ;
 }
+	.big,
+	.mid,
+	.lit{
+		transition: all .3s linear;
+		color: #333;
+		line-height: 30px;
+		
+	}
+	.big img,
+	.mid img,
+	.lit img{
+		margin: 0px auto !important;
+		height: auto !important;
+		
+	}
+	.big span,
+	.mid span,
+	.lit span{
+		transition: all .3s linear;
+	}
+	.big p,
+	.mid p,
+	.lit p{
+		margin-bottom: 20px;
+		transition: all .3s linear;
+	}
+	.big p,
+	.big p span{
+		font-size: 18px !important;
+	}
+	.mid p,
+	.mid p span{
+		font-size: 16px !important;
+	}
+	.lit p,
+	.lit p span{
+		font-size: 14px !important;
+	}
+
 .sline{
 	color: #e73825 !important;
 }

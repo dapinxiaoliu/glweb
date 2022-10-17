@@ -5,23 +5,23 @@
 				<div class="tvwrapleftitem comborder">
 					<h2 class="comtitle">
 						<strong>冠领新闻</strong>
-						<a href="javascript:void(0)" class="margina"  @click="tolist('冠领新闻')">更多></a>
+						<a href="javascript:void(0)" class="margina"  @click="tolist('gl')">更多></a>
 					</h2>
 					<ul>
-						<li v-for="item,index in guanlingData" :key="item.id"><a href="javascript:void(0)" @click="toinfo($event,item.id,create_time,'冠领新闻')">{{item.title}}</a><span>{{item.create_time}}</span></li>
+						<li v-for="item,index in guanlingData" :key="item.id"><a href="javascript:void(0)" @click="toinfo($event,item.id,item.create_time,'gl')">{{item.title}}</a><span>{{item.create_time}}</span></li>
 					</ul>
 				</div>
 				<div class="tvwrapleftitem comborder">
 					<h2 class="comtitle">
 						<strong>行业新闻</strong>
-						<a href="javascript:void(0)" class="margina" @click="tolist('行业新闻')">更多></a>
+						<a href="javascript:void(0)" class="margina" @click="tolist('hy')">更多></a>
 					</h2>
 					<ul>
-						<li v-for="item,index in hangyeData" :key="item.id"><a href="javascript:void(0)" @click="toinfo($event,item.id,create_time,'行业新闻')">{{item.title}}</a><span>{{item.create_time}}</span></li>
+						<li v-for="item,index in hangyeData" :key="item.id"><a href="javascript:void(0)" @click="toinfo($event,item.id,item.create_time,'hy')">{{item.title}}</a><span>{{item.create_time}}</span></li>
 					</ul>
 				</div>
 			</div>
-			<Aside :lmname="lmname"/>
+			<Aside :lmname="lmname" @changeUrl='gotoMore'/>
 
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 	import {request} from '../network/request.js'
 	import GLOBAL from '../global/global.js'
 	import Aside from "../components/Aside"
-	import {mapMutations} from 'vuex'
+	import {mapMutations,mapGetters} from 'vuex'
 	export default{
 		name:'News',
 		components:{
@@ -74,27 +74,30 @@
 				})
 			},
 			toinfo($event,id,time,name){
-				// localStorage.setItem('newscatid',catid)
-				let title = $event.target.innerText
-				this.$store.commit('setData',{
-					id:id,
-					leibie:'xinnew',
-					title:title,
-					time:time
+				this.$router.push({ 
+					path:'/news/'+name+'x/'+id+'.html',
 				})
-				this.$router.push({ path:'/news/'+id+'.html'})
-				this.$store.commit('setMoreName',name)
 			},
 			tolist(name){
-				this.$store.commit('setMoreName',name)
-				this.$router.push({ name:'newslist' })
+				//gl 等于冠领新闻  hy 等于行业新闻
+				this.$router.push({
+					path:'/news/'+name+'/index.html'
+				})
+			},
+			gotoMore(val){
+				this.$router.push('/'+val+'/index.html')
 			}
 		},
 		beforeCreate() {
 			
 		},
+		computed:{
+			...mapGetters(['getMoreName'])
+		},
+		mounted() {
+			// alert(this.getMoreName)
+		},
 		created() {
-			
 			this.getData(29)
 			this.getData(32)
 		}

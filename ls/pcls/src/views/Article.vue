@@ -4,7 +4,7 @@
 		
 		<div class="tvwrap w12">
 			<div class="tvwrapleft comborder">
-				<Html :lmname="lmname" :id="arcid" :leibie="leibie">
+				<Html :lmname="lmname" :id="arcid" :leibie="leibie" @tolist='getlistinfo'>
 					<template #title>
 						<h3>{{title}}</h3>
 					</template>
@@ -58,108 +58,36 @@
 				fontsize:'18px',
 				lmname:'',
 				arcid:0,
+				resname:''
 				
 			}
 		},
 		methods:{
-
-
-			getPNArc(id,catid){
-				let that = this
-				let url = that.prenextarc+id+'&catid='+catid
-				request({
-					url: url,
-					responseType: 'json',
-					transformResponse:[function(data){
-						let jsondata = JSON.parse(data)
-						// console.log(jsondata);
-						if(jsondata['code'] == 200){
-							if(jsondata['data']['down'] == null){
-								that.nextshow = true
-							}else{
-								that.nextshow = false
-								that.downArc = jsondata['data']['down']
-							}
-							if(jsondata['data']['up'] == null){
-								that.preshow = true
-							}else{
-								that.preshow = false
-								that.upArc = jsondata['data']['up']
-							}
-						}
-					}]
-				})
-			},
-			goback(){
-				let path = this.lmpath.substr(1,this.lmpath.length-2)
-				localStorage.setItem(path+'catid',this.catid)
-				this.$router.push({ path:this.lmpath+'list/index.html',query:{'id':this.catid}})
-			},
-			changefont(name){
-				
-				if(name == 'b'){
-					$('.contenttitle em').eq(0).addClass('active').siblings().removeClass()
-					$('.contentbox p span').animate({
-						'font-size':'20px',
-						'line-height':'28px !important'
-					})
-					
-				}else if(name == 'm'){
-					$('.contenttitle em').eq(1).addClass('active').siblings().removeClass()
-					$('.contentbox p span').animate({
-						'font-size':'16px',
-						'line-height':'24px !important'
-					})
-					
-				}else if(name == 's'){
-					$('.contenttitle em').eq(2).addClass('active').siblings().removeClass()
-					$('.contentbox p span').animate({
-						'font-size':'14px',
-						'line-height':'22px !important'
-					})
-				}
-			},
-			gotoMore(obj){
-				this.$store.commit('setMoreName',obj.name)
+			getlistinfo(val){
 				this.$router.push({
-					name:obj.url
+					path:'/'+val+'/index.html'
 				})
+			},
+			gotoMore(val){
+				this.$router.push('/'+val+'/index.html')
 			}
-		},
-
-		computed:{
-			...mapGetters(['getList']),
-			...mapGetters(['getMoreName'])
 		},
 		created(){
 			//进入页面保存信息，避免刷新丢失
-			let arctitle = this.getList.title
-			if(arctitle){
-				this.title = this.getList.title
-				this.leibie = this.getList.leibie
-				this.time = this.getList.time
-				localStorage.setItem('arcleibie',this.getList.leibie)
-				localStorage.setItem('arctitle',this.getList.title)
-				localStorage.setItem('arctime',this.getList.time)
-			}else{
-				this.leibie = localStorage.getItem('arcleibie')
-				this.title = localStorage.getItem('arctitle')
-				this.time = localStorage.getItem('arctime')
-			}
 			
+			let pathname = this.$route.name
+			this.resname = this.$route.path.split('/')[2]
+			if(pathname == 'newshtml'){
+				if(this.resname.indexOf('gl') != -1) {
+					this.lmname = '冠领新闻'
+				}else{
+					this.lmname = '行业新闻'
+				}
+				this.leibie = this.resname.slice(-1)
+				
+			}
 			this.arcid = this.id
-			if(this.getMoreName){
-				this.lmname = this.getMoreName
-				localStorage.setItem('morename',this.getMoreName)
-			}else{
-				let morename = localStorage.getItem('morename')
-				this.lmname = morename
-			}
-			
-			
-			
-			
-			
+			document.title = this.lmname+'_北京冠领律师事务所拆迁官网'
 		},
 		mounted() {
 			
@@ -170,11 +98,6 @@
 			}else{
 				this.breadcrumbList = [{path: meta.path.split('/')[1], name: meta.name}]
 			}
-			
-			
-
-
-	
 		},
 		watch:{
 		  $route(to, from){

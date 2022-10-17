@@ -127,13 +127,13 @@ export default new Router({
 	  component: News
 	},
 	{
-	  path: '/news/list/index.html',
+	  path: '/:news/:name/index.html',
 	  name: 'newslist',
 	  component: Newslist,
 	  meta:{ parent: [ {path: '/news/index.html', name: '冠领新闻'}]}
 	},
 	{
-	 path: '/news/:id.html',
+	 path: '/:news/:biaoshi/:id.html',
 	 name: 'newshtml',
 	 component: Article,
 	 props: true,

@@ -880,8 +880,6 @@ export default {
   mounted() {
 
 
-	document.title='北京冠领律师事务所'
-	
 	this.$nextTick(function(){
 		setTimeout(function(){
 				

@@ -31,7 +31,6 @@
 				</div>
 			</div>
 			<Aside :lmname="lmname" @changeUrl="gotoMore"/>
-
 		</div>
 	</div>
 </template>
@@ -42,17 +41,15 @@
 	import {request} from '../network/request.js'
 	import GLOBAL from '../global/global.js'
 	import Aside from "../components/Aside"
-	import {mapState, mapGetters} from 'vuex'
 	export default{
 		name:'Newslist',
-		props:['lmname'],
 		components:{
 			Aside
 		},
 		data(){
 			return {
 				breadcrumbList:[],
-				lmname:'冠领新闻',
+				lmname:'',
 				newsData:[],
 				currentpage:1,
 				pagerCount:7,
@@ -60,7 +57,8 @@
 				lmid:0,
 				hynews:[],
 				pagesize:20,
-				url:''
+				url:'',
+				resname:''
 			}
 		},
 		methods:{
@@ -73,7 +71,7 @@
 					responseType: 'json',
 					transformResponse:[function(data){
 						let jsondata = JSON.parse(data)
-						console.log(jsondata);
+						// console.log(jsondata);
 						if(jsondata['code'] == 200){
 							that.hynews = []
 							that.totalPage = 0
@@ -96,7 +94,7 @@
 					responseType: 'json',
 					transformResponse:[function(data){
 						let jsondata = JSON.parse(data)
-						console.log(jsondata);
+						// console.log(jsondata);
 						if(jsondata['code'] == 200){
 							that.hynews = []
 							let beforeData = jsondata['data']
@@ -125,37 +123,17 @@
 					}]
 				})
 			},
+			gotoMore(val){
+				this.$router.push('/'+val+'/index.html')
+			},
 			toinfo($event,leibie,id,time){
 				let title = $event.target.innerText
-				this.$store.commit('setData',{
-					id:id,
-					leibie:leibie,
-					title:title,
-					time:time
-				})
+				let type = leibie == 'xinnew' ? 'x' : 'z'
 				// localStorage.setItem('newsleibie',leibie)
-				this.$router.push({ path:'/news/'+id+'.html'})
-			},
-			gotoMore(obj){
-				this.lmname = obj.name
-				this.$store.commit('setMoreName',obj.name)
-				
-				
+				this.$router.push({ path:'/news/'+this.resname+type+'/'+id+'.html'})
 			}
-		},
-		computed:{
-			...mapGetters(['getMoreName'])
 		},
 		created() {
-			console.log('aa');
-			let morename = this.getMoreName
-			if(morename){
-				this.lmname = morename
-				localStorage.setItem('morename',morename)
-			}else{
-				this.lmname = localStorage.getItem('morename')
-			}
-			let that = this
 			let meta = this.$route.meta;
 			if(meta && meta.parent){
 				this.breadcrumbList = meta.parent
@@ -163,24 +141,29 @@
 				this.breadcrumbList = [{path: meta.path.split('/')[1], name: meta.name}]
 			}
 
-			let newscatid = localStorage.getItem('newscatid')
-			that.lmid = newscatid
-			
-			if(morename == '行业新闻'){
-				that.url = '/hynews'
+			//根据url验证冠领新闻或者行业新闻
+			this.resname = this.$route.path.split('/')[2]
+			if(this.resname == 'gl'){
+				this.url = '/mtnews'
+				this.lmname = '冠领新闻'
 			}else{
-				that.url = '/mtnews'
+				this.url = '/hynews'
+				this.lmname = '行业新闻'
 			}
-			// that.getData()
-			that.gethynews()
+			
+			this.gethynews()
 		},
 		watch:{
-			lmname(){
-				let morename = this.getMoreName
-				if(morename == '行业新闻'){
-					this.url = '/hynews'
-				}else{
+			$route(to, from){
+				//根据url验证冠领新闻或者行业新闻
+				
+				this.resname = this.$route.path.split('/')[2]
+				if(this.resname == 'gl'){
 					this.url = '/mtnews'
+					this.lmname = '冠领新闻'
+				}else{
+					this.url = '/hynews'
+					this.lmname = '行业新闻'
 				}
 				this.gethynews()
 			}

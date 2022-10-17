@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-	<Header/>
+	<Header @searchfn='getSearchMsg'/>
 	<router-view></router-view>
 	<Footer/>
   </div>
@@ -12,7 +12,19 @@
         components: {
             Header,
             Footer
-        }
+        },
+		methods:{
+			getSearchMsg(data){
+				let msg = encodeURI(data.msg)
+				this.$router.push({
+					path:'/search/index.html',
+					query:{'name':msg,id:Math.random()*10000+1}
+				})
+			}
+		},
+		mounted() {
+			
+		}
     }
 </script>
 <style lang="scss" scoped>

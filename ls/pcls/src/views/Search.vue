@@ -7,17 +7,20 @@
 						<strong>{{lmname}}</strong>
 						<span>当前位置：<a href="/">北京冠领律师事务所拆迁官网</a> > <a href="javascript:void(0)">{{name}}</a> ></span> 
 					</h2>
-					<ul>
+					<h2  v-show="!datashow" class="warnningmsg">抱歉，暂没有 <b>{{name}}</b> 的相关信息！</h2>
+					<ul v-show="datashow">
 						<li v-for="item,index in newsData" :key="item.id">
 							<a href="javascript:void(0)" @click="toinfo(item.id,item.catid,item.leibie)">
 								<p v-html="item.title"></p><span>{{item.create_time}}</span>
 							</a>
 						</li>
 					</ul>
-					<div class="page">
+
+					<div class="page" v-show="datashow">
 								   <!-- hide-on-single-page -->
 					 <el-pagination
 					   background
+					   hide-on-single-page
 					   :current-page.sync='currentpage'
 					   @current-change="getPage"
 					   layout="prev, pager, next"
@@ -50,13 +53,14 @@
 		data(){
 			return {
 				breadcrumbList:[],
-				lmname:'您的搜索如下：',
+				lmname:'您的搜索结果：',
 				newsData:[],
 				currentpage:1,
 				pagerCount:7,
 				totalPage:0,
 				lmid:0,
-				name:''
+				name:'',
+				datashow:true
 			}
 		},
 		methods:{
@@ -67,7 +71,8 @@
 					
 					if(res['data']['code'] == 200){
 						// this.newsData = res['data']['data'].replace('/'+this.name+'/', '<em>'+this.name+'</em>')
-						console.log(res);
+						// console.log(res);
+						that.datashow = true
 						that.newsData = []
 						let beforeData = res['data']['data']
 						beforeData.forEach(function(value,index,arr){
@@ -77,6 +82,8 @@
 							that.newsData.push(value)
 						})
 						
+					}else{
+						that.datashow = false
 					}
 				})
 			},
@@ -139,7 +146,15 @@
 </script>
 
 <style lang="scss" scoped>
-
+.warnningmsg{
+	text-align: center;
+	font-size: 18px;
+	font-weight: normal;
+	margin-top: 30%;
+	b{
+		color: #e73825;
+	}
+}
 .page{
 	padding-bottom: 30px;
 }
@@ -156,6 +171,8 @@
                     width: 155px;
                     margin-left: 25px;
                     padding: 0;
+					font-size: 16px;
+					font-weight: bold;
                 }
                 strong::after{
                     left: 33%; 

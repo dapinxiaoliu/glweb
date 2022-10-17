@@ -45,8 +45,8 @@
 				<li><a href="javascript:void(0)" @click="toinfo('nolist',2)" >冠领在办案</a></li>
 			</ul>
 			<ul v-else-if="showaside == 'news'">
-				<li><a href="javascript:void(0)" @click="toinfo('冠领新闻')" >冠领新闻</a></li>
-				<li><a href="javascript:void(0)" @click="toinfo('行业新闻')" >行业新闻</a></li>
+				<li><a href="javascript:void(0)" @click="toinfo('glxw')" >冠领新闻</a></li>
+				<li><a href="javascript:void(0)" @click="toinfo('hyxw')" >行业新闻</a></li>
 			</ul>
 			<ul v-else-if="showaside == 'newsteshu'">
 				<li><router-link to="/team/index.html">团队介绍</router-link></li>
@@ -169,11 +169,9 @@
 
 			toinfo(xm){ 
 				let name = this.$route.name
-				if(name == 'newshtml' || name == "newslist"){
-					name = 'newslist'
-				}
-				this.$emit('changeUrl',{'name':xm,'url':name})
-				
+				let routename = this.$route.path.split('/')
+				let path = xm == 'glxw' ? 'gl' : 'hy'
+				this.$emit('changeUrl',routename[1]+'/'+path)
 			}
 		},
 		mounted() {
